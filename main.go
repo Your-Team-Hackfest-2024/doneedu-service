@@ -2,6 +2,7 @@ package main
 
 import (
 	"doneedu/base-go/src/source/config"
+	"doneedu/base-go/src/source/modules"
 	serverSet "doneedu/base-go/src/source/server"
 
 	"log"
@@ -10,7 +11,6 @@ import (
 )
 
 func main() {
-	//test connection with firebase
 	if err := godotenv.Load(); err != nil {
 		log.Println("Error loading .env file")
 	}
@@ -23,5 +23,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+    modules.RegisterModules(cfg, server.Engine(), server.FirestoreSession())
     server.Start()
 }

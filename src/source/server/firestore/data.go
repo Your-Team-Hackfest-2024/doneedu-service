@@ -11,6 +11,7 @@ type Data struct {
 	id        string
 	csrfToken string
 	data      map[string]interface{}
+	storage   Storage
 	expiredAt time.Time
 }
 type Storage interface {
@@ -25,6 +26,25 @@ func NewData(ctx *gin.Context, id string, csrfToken string, data map[string]inte
 		id:        id,
 		csrfToken: csrfToken,
 		data:      data,
+		storage:   storage,
 		expiredAt: expiredAt,
 	}
+}
+
+func (d *Data) Id() string {
+	return d.id
+}
+
+func (d *Data) CSRFToken() string {
+	return d.csrfToken
+}
+
+func (d *Data) Get(key string) (interface{}, bool) {
+	data, ok := d.data[key]
+	return data, ok
+}
+
+// Setiap set harus disertai dengan save
+func (d *Data) Set(key string, value interface{}) {
+	d.data[key] = value
 }

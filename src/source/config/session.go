@@ -7,10 +7,11 @@ import (
 
 type SessionConfig struct {
 	// Firestore session adapter
-	FireBaseProjectID string `env:"FIREBASE_PROJECT_ID"`
-	Driver            string `env:"SESSION_DRIVER,default="`
-	Credentials       string `env:"GOOGLE_APPLICATION_CREDENTIALS,default="`
-	FirestoreCollection string 
+	FireBaseProjectID   string `env:"FIREBASE_PROJECT_ID"`
+	Driver              string `env:"SESSION_DRIVER,default="`
+	Credentials         string `env:"GOOGLE_APPLICATION_CREDENTIALS,default="`
+	FirestoreCollection string `env:"SESSION_FIRESTORE_COLLECTION,default=sessions"`
+	FirebaseAPIKey      string `env:"FIREBASE_API_KEY,default="`
 }
 
 var availableDrivers = []string{
@@ -21,7 +22,7 @@ func (c ConfigSet) GetSessionConfig() SessionConfig {
 	return c.session
 }
 
-func setupSessionConfig(appName string) SessionConfig {
+func setupSessionConfig() SessionConfig {
 	var session SessionConfig
 	err := envdecode.StrictDecode(&session)
 	if err != nil {

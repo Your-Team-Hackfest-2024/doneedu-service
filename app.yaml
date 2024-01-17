@@ -1,0 +1,14 @@
+runtime: go
+env: flex
+
+runtime_config: 
+  operating_system: "ubuntu22"
+  runtime_version: "1.21.3"
+
+automatic_scaling:
+  min_num_instances: 0
+  max_num_instances: 1
+  cool_down_period_sec: 180
+  cpu_utilization:
+    target_utilization: 0.6
+  target_concurrent_requests: 100

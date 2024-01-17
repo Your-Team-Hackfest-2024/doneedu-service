@@ -22,9 +22,3 @@ DoNeedU is a platform where users can contribute to donation events or donate in
 2. **Cash Donations:** Users can also donate in cash, which will be converted into essential items for those in need.
 
 3. **Educational System:** Our donation events include an educating system aimed at informing pregnant mothers about preventive measures to avoid stunting in their babies.
-
-## Getting Involved
-
-We welcome contributions from individuals and organizations who share our mission. Feel free to explore the project, raise issues, and submit pull requests.
-
-Let's work together to create a healthier future for children and communities!

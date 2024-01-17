@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/firestore"
+	"firebase.google.com/go/auth"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -17,11 +18,12 @@ type FirestoreData struct {
 
 type Firestore struct {
 	client     *firestore.Client
+	auth       *auth.Client
 	collection string
 }
 
-func NewFirestore(client *firestore.Client, collection string) *Firestore {
-	return &Firestore{client, collection}
+func NewFirestore(client *firestore.Client, auth *auth.Client, collection string) *Firestore {
+	return &Firestore{client, auth, collection}
 }
 
 func (f *Firestore) Get(ctx *gin.Context, id string) (*Data, error) {
@@ -55,4 +57,11 @@ func (f *Firestore) Delete(ctx *gin.Context, id string) error {
 	ref := f.client.Collection(f.collection).Doc(id)
 	_, err := ref.Delete(ctx)
 	return err
+}
+
+func (f *Firestore) GetClient() *firestore.Client {
+	return f.client
+}
+func (f *Firestore) GetAuth() *auth.Client {
+	return f.auth
 }

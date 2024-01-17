@@ -31,6 +31,11 @@ func setupFirestoreSessionAdapter(cfg config.SessionConfig) (*firestoreAdapter.F
 		log.Printf("Error create client")
 		log.Fatalln(err)
 	}
+	auth, err := app.Auth(ctx)
+	if err != nil {
+		log.Printf("Error auth client")
+		log.Fatalln(err)
+	}
 	defer client.Close()
-	return firestoreAdapter.NewFirestore(client, cfg.FirestoreCollection), nil
+	return firestoreAdapter.NewFirestore(client, auth, cfg.FirestoreCollection), nil
 }

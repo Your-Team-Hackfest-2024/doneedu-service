@@ -1,5 +1,6 @@
 import { FlashList } from '@shopify/flash-list';
 import { useToastController } from '@tamagui/toast';
+import { Link, useRouter } from 'expo-router';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { IconChevronRight } from 'tabler-icons-react-native';
 import {
@@ -22,15 +23,13 @@ import {
 
 import { Card } from '@/components/Card';
 import { Container } from '@/components/Container';
+import { DATA } from '@/constants/mockData';
 import { useAuthStore } from '@/lib/stores/auth';
-
-const DATA = {
-  title: 'Rohingya Refugees Crisis',
-};
 
 export default function HomeScreen() {
   const toast = useToastController();
   const theme = useTheme();
+  const router = useRouter();
 
   const user = useAuthStore((state) => state.user);
 
@@ -45,9 +44,11 @@ export default function HomeScreen() {
         <YStack space="$2">
           <XStack alignItems="flex-end" justifyContent="space-between">
             <H4>Ongoing Donations</H4>
-            <TouchableOpacity>
-              <SizableText color="$accent">See All</SizableText>
-            </TouchableOpacity>
+            <Link href="/donation/" asChild>
+              <TouchableOpacity>
+                <SizableText color="$accent">See All</SizableText>
+              </TouchableOpacity>
+            </Link>
           </XStack>
           <XStack minHeight={2}>
             <FlashList
@@ -64,17 +65,13 @@ export default function HomeScreen() {
                     scale: 0.95,
                   }}
                   onPress={() => {
-                    toast.show('Clicked');
+                    router.push('/donation/');
                   }}
                 >
                   <Card.Header padded>
                     <H2>See More</H2>
                     <Paragraph>See more ongoing donations and make a difference.</Paragraph>
                   </Card.Header>
-                  <Card.Footer padded>
-                    <XStack flex={1} />
-                    <Button borderRadius="$10">Donate</Button>
-                  </Card.Footer>
                   <Card.Background>
                     <Image
                       resizeMode="contain"
@@ -97,7 +94,7 @@ export default function HomeScreen() {
                     scale: 0.95,
                   }}
                   onPress={() => {
-                    toast.show('Clicked');
+                    router.push({ pathname: '/donation/', params: { id: item.id } });
                   }}
                 >
                   <Card.Header>
@@ -141,7 +138,9 @@ export default function HomeScreen() {
                         flex={1}
                       />
                     </XStack>
-                    <Button>Donate Now</Button>
+                    <Link href={{ pathname: '/payment', params: { donationId: item.id } }} asChild>
+                      <Button>Donate Now</Button>
+                    </Link>
                   </Card.Footer>
                 </Card>
               )}
