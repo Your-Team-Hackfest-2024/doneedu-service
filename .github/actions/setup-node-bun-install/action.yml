@@ -1,0 +1,16 @@
+name: 'Setup  Node + Bun + Install Dependencies'
+description: 'Setup  Node + Bun + Install Dependencies'
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup bun
+      uses: oven-sh/setup-bun@v1
+
+    - name: Setup Node 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install deps
+      run: bun install
+      shell: bash
