@@ -17,8 +17,6 @@ export const BackButton = ({ modal, canGoBack }: BackButtonProps) => {
         <Button
           unstyled
           padding="$3"
-          flexDirection="row"
-          backgroundColor="transparent"
           pressStyle={{ opacity: 0.5 }}
           onPress={() => {
             if (modal) {

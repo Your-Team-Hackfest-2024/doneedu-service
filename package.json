@@ -56,6 +56,7 @@
     "react-native-svg": "13.9.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.19.6",
+    "styled-components": "^6.1.8",
     "tabler-icons-react-native": "^2.42.1",
     "tamagui": "1.84.0",
     "zod": "^3.22.4",

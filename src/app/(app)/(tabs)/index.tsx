@@ -94,7 +94,7 @@ export default function HomeScreen() {
                     scale: 0.95,
                   }}
                   onPress={() => {
-                    router.push({ pathname: '/donation/', params: { id: item.id } });
+                    router.push({ pathname: '/(app)/donation/[id]', params: { id: item.id } });
                   }}
                 >
                   <Card.Header>
